@@ -57,7 +57,7 @@ class SignUpScreen extends StatelessWidget {
               AuthButton(title: "SIGN UP", function: (){
                 // go to allow access
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AllowAccessLocation()));
-
+                // HomeScreen
               })
             ],
           ),

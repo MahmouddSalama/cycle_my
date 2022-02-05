@@ -1,18 +1,17 @@
 import 'package:cycle_my/consts/colors.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cycle_my/screens/body/adminbody/screens/edit_cycle.dart';
 import 'package:flutter/material.dart';
-class UserOrders extends StatelessWidget {
+class AllCycles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: KmainColor,
-        title:const Text("My Orders"),
+        title: const Text('All Cycles'),
       ),
       body: Center(
         child: ListView.builder(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           itemBuilder: (ctx, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
@@ -20,14 +19,14 @@ class UserOrders extends StatelessWidget {
                 width: 350,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                 // color: Colors.black,
+                  // color: Colors.black,
                   border: Border.all(color: KmainColor, width: 1.5),
                 ),
                 child: Column(
                   children: [
                     Container(
                       child:const Text(
-                       "user name",
+                        "name",
                         style: TextStyle(
                           fontSize: 18,
                           color: KmainColor,
@@ -47,18 +46,32 @@ class UserOrders extends StatelessWidget {
                         crossAxisAlignment:
                         CrossAxisAlignment.stretch,
                         children: [
-                          buildColumn(text1: 'Day : ', text2: '12-2-2020'),
-                          buildColumn(text1: 'time : ', text2: "1PM"),
-                          buildColumn(text1: 'price : ', text2: '50' +
-                              ' LE'),
-                          buildColumn(text1: 'Way of payment : ', text2:'Credit card'),
-                          buildColumn(text1: 'Accept : ', text2:'true'),
-                          TextButton(onPressed: ()async{
-                          //  await FirebaseFirestore.instance.collection('orders').doc(docs[index].id).delete();
-                          }, child:const Text(
-                            'Cancel',
-                            style: TextStyle(color: Colors.red),
-                          )),
+                          buildColumn(text1: 'Name : ', text2: 'Cycle'),
+                          buildColumn(text1: 'Date : ', text2: "2-2-2022"),
+                          buildColumn(text1: 'Model : ', text2:'Credit card'),
+                          buildColumn(text1: 'Color : ', text2:'red'),
+                          buildColumn(text1: 'Location : ', text2:'(x,y)'),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(onPressed: ()async{
+                                //  await FirebaseFirestore.instance.collection('orders').doc(docs[index].id).delete();
+                              }, child:const Text(
+                                'Delete',
+                                style: TextStyle(color: Colors.red),
+                              )),
+                              TextButton(onPressed: ()async{
+                                // go to edit screen
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => EditCycle()));
+                              }, child:const Text(
+                                'Edit',
+                                style: TextStyle(color: Colors.green),
+                              )),
+                            ],
+                          ),
                         ],
                       ),
                     )
@@ -72,7 +85,6 @@ class UserOrders extends StatelessWidget {
       ),
     );
   }
-
   Column buildColumn({text1,text2}) {
     return Column(
       children: [
@@ -102,4 +114,3 @@ class UserOrders extends StatelessWidget {
     );
   }
 }
-

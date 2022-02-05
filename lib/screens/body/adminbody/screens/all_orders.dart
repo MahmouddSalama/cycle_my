@@ -1,14 +1,13 @@
 import 'package:cycle_my/consts/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-class UserOrders extends StatelessWidget {
+class AllOrders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: KmainColor,
-        title:const Text("My Orders"),
+        title:const Text("All Orders"),
       ),
       body: Center(
         child: ListView.builder(
@@ -20,14 +19,14 @@ class UserOrders extends StatelessWidget {
                 width: 350,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                 // color: Colors.black,
+                  // color: Colors.black,
                   border: Border.all(color: KmainColor, width: 1.5),
                 ),
                 child: Column(
                   children: [
                     Container(
                       child:const Text(
-                       "user name",
+                        "user name",
                         style: TextStyle(
                           fontSize: 18,
                           color: KmainColor,
@@ -53,12 +52,24 @@ class UserOrders extends StatelessWidget {
                               ' LE'),
                           buildColumn(text1: 'Way of payment : ', text2:'Credit card'),
                           buildColumn(text1: 'Accept : ', text2:'true'),
-                          TextButton(onPressed: ()async{
-                          //  await FirebaseFirestore.instance.collection('orders').doc(docs[index].id).delete();
-                          }, child:const Text(
-                            'Cancel',
-                            style: TextStyle(color: Colors.red),
-                          )),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(onPressed: ()async{
+                                //  await FirebaseFirestore.instance.collection('orders').doc(docs[index].id).delete();
+                              }, child:const Text(
+                                'Cancel',
+                                style: TextStyle(color: Colors.red),
+                              )),
+                              TextButton(onPressed: ()async{
+                                //  await FirebaseFirestore.instance.collection('orders').doc(docs[index].id).delete();
+                              }, child:const Text(
+                                'accept',
+                                style: TextStyle(color: Colors.green),
+                              )),
+                            ],
+                          ),
+
                         ],
                       ),
                     )
@@ -102,4 +113,3 @@ class UserOrders extends StatelessWidget {
     );
   }
 }
-

@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 class OrderButton extends StatelessWidget {
   final String text;
   final Function function;
+  final Color color;
 
   const OrderButton({
     Key? key,
     required this.text,
     required this.function,
+    this.color =KmainColor,
   }) : super(key: key);
 
   @override
@@ -21,7 +23,7 @@ class OrderButton extends StatelessWidget {
           width: 350,
           height: 60,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: KmainColor),
+              borderRadius: BorderRadius.circular(10), color: color),
           alignment: Alignment.center,
           child:  Text(
             text,
