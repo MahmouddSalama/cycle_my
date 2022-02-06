@@ -3,7 +3,6 @@ import 'package:cycle_my/screens/auth/component/auth_bottn.dart';
 import 'package:cycle_my/screens/auth/component/default_text_field.dart';
 import 'package:cycle_my/screens/auth/screens/foget_pass.dart';
 import 'package:cycle_my/screens/body/adminbody/screens/home_screen.dart';
-import 'package:cycle_my/screens/body/userbody/screens/allow_location_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 class LogInScreen extends StatelessWidget {

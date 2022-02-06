@@ -3,7 +3,6 @@ import 'package:cycle_my/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 main(){
   runApp(MyApp());
-
 }
 class MyApp extends StatelessWidget {
   @override
@@ -15,3 +14,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+

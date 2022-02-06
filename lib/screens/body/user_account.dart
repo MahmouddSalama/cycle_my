@@ -108,7 +108,7 @@ class UserAccount extends StatelessWidget {
                 alignment: Alignment.center,
                 width: size.width * .31,
                 height: size.height * .17,
-                decoration: BoxDecoration(
+                decoration:const BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
                   boxShadow: [
@@ -124,7 +124,7 @@ class UserAccount extends StatelessWidget {
                   size: 100,
                 )),
           ),
-          Align(
+         const Align(
             child: Text(
               "User Name",
               style: TextStyle(
