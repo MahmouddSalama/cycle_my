@@ -30,7 +30,6 @@ class DrawerWidget extends StatelessWidget {
             },
             iconData: Icons.open_with_rounded,
           ),
-
          const Divider(height: 3, color: Colors.indigoAccent),
           CategoryListTileGarage(
             text: 'Logout',

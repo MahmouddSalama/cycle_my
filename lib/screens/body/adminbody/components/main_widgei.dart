@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 class MainWidget extends StatelessWidget {
   final Function function;
   final String text;
-  final String imagUrl;
+  //final String imagUrl;
 
   const MainWidget({
     Key? key,
     required this.function,
     required this.text,
-    required this.imagUrl,
+    //required this.imagUrl,
   }) : super(key: key);
 
   @override
@@ -32,23 +32,20 @@ class MainWidget extends StatelessWidget {
                 KmainColor,
               ])),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: SizedBox(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      imagUrl,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  width: 110,
-                  height: size.height * .15,
-                ),
-              ),
-             const SizedBox(width: 20,),
+             //  Padding(
+              //              //    padding:
+              //              //        const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              //              //    child: SizedBox(
+              //              //      child: ClipRRect(
+              //              //        borderRadius: BorderRadius.circular(10),
+              //              //      ),
+              //              //      width: 110,
+              //              //      height: size.height * .15,
+              //              //    ),
+              //              //  ),
+              //              // const SizedBox(width: 20,),
               Text(
                 text,
                 style:const TextStyle(

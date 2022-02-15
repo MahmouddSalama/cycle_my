@@ -88,7 +88,6 @@ class AllCycles extends StatelessWidget {
   Column buildColumn({text1,text2}) {
     return Column(
       children: [
-
         Row(
           children: [
             Text(

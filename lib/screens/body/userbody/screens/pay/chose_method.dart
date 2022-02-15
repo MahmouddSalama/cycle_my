@@ -39,38 +39,38 @@ class _ChoseMethodOFPayState extends State<ChoseMethodOFPay> {
                             valu: 1),
                         buildColumn(
                             iconData: Icons.soap, title: "Paypal", valu: 2),
-                        buildColumn(
-                            iconData: Icons.monetization_on,
-                            title: "Cash",
-                            valu: 3,
-                            x: 1),
+
                         const SizedBox(
                           height: 35,
                         ),
-                        OrderButton(
-                            text: 'Continue',
-                            function: () {
-                              if (payGroup == 0) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                 const SnackBar(
-                                    content:
-                                        Text("Chose Method to pay and continue",style: TextStyle(
-                                          fontSize: 18
-                                        ),),
-                                   backgroundColor: KmainColor,
-                                  ),
-                                );
-                              }else{
-                                // go to pay screen
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>PayScreen()));
 
-                              }
-                            }),
                       ],
                     ),
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 35,
+              ),
+              OrderButton(
+                  text: 'Continue',
+                  function: () {
+                    if (payGroup == 0) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content:
+                          Text("Chose Method to pay and continue",style: TextStyle(
+                              fontSize: 18
+                          ),),
+                          backgroundColor: KmainColor,
+                        ),
+                      );
+                    }else{
+                      // go to pay screen
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>PayScreen()));
+
+                    }
+                  }),
             ],
           ),
         ),

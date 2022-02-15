@@ -29,10 +29,16 @@ class SignUpScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10,),
               DefaultTextField(
-                label: 'Username',
+                label: 'Email',
                 validetor: (v){},
                 textEditingController: null,
                 textInputType: TextInputType.emailAddress,
+              ),
+              DefaultTextField(
+                label: 'Username',
+                validetor: (v){},
+                textEditingController: null,
+                textInputType: TextInputType.name,
               ),
               DefaultTextField(
                 label: 'Full Name',
@@ -56,7 +62,9 @@ class SignUpScreen extends StatelessWidget {
               const SizedBox(height: 20,),
               AuthButton(title: "SIGN UP", function: (){
                 // go to allow access
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AllowAccessLocation()));
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(
+                        builder: (context)=>AllowAccessLocation()));
                 // HomeScreen
               })
             ],

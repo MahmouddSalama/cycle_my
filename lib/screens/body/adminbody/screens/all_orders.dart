@@ -49,7 +49,7 @@ class AllOrders extends StatelessWidget {
                           buildColumn(text1: 'Day : ', text2: '12-2-2020'),
                           buildColumn(text1: 'time : ', text2: "1PM"),
                           buildColumn(text1: 'price : ', text2: '50' +
-                              ' LE'),
+                              ' SR'),
                           buildColumn(text1: 'Way of payment : ', text2:'Credit card'),
                           buildColumn(text1: 'Accept : ', text2:'true'),
                           Row(
