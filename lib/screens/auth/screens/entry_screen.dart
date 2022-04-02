@@ -32,11 +32,11 @@ class EntryToApp extends StatelessWidget {
              const SizedBox(height: 10,),
              AuthButton(title: 'SIGN UP', function: (){
                // go to register screen
-               Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpScreen()));
+               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignUpScreen()));
              }),
              AuthButton(title: 'LOG IN', function: (){
                // go to login screen
-               Navigator.push(context, MaterialPageRoute(builder: (context)=>LogInScreen()));
+               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LogInScreen()));
              }),
            ],
          ),

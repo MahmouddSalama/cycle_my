@@ -1,5 +1,6 @@
 import 'package:cycle_my/screens/body/userbody/components/allow_location.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 import 'currunt_location.dart';
 
@@ -39,15 +40,17 @@ class AllowAccessLocation extends StatelessWidget {
                 style: TextStyle(color: Color(0xff5C5C5C), fontSize: 30),
               ),
               const SizedBox(height: 30),
-              AllowLocationButton(
-                title: 'Allow',
-                function: () {
-                  // ask to open location
-                  //....
-                  // go to map
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => currentLocation()));
-                },
+              Builder(
+                builder:(ctx)=> AllowLocationButton(
+                  title: 'Allow',
+                  function: () {
+                    // ask to open location
+                    //....
+                    // go to map
+                    Navigator.pushReplacement(ctx,
+                        MaterialPageRoute(builder: (ctx) => currentLocation()));
+                  },
+                ),
               ),
               AllowLocationButton(
                 title: 'Allow While Using App',
@@ -83,4 +86,5 @@ class AllowAccessLocation extends StatelessWidget {
       ),
     );
   }
+
 }

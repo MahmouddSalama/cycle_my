@@ -2,6 +2,7 @@
 import 'package:cycle_my/screens/body/component/drawer/widget/category.dart';
 import 'package:cycle_my/screens/body/component/drawer/widget/drawer_header.dart';
 import 'package:cycle_my/screens/body/userbody/screens/orders.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../user_account.dart';
@@ -34,12 +35,10 @@ class DrawerWidget extends StatelessWidget {
           CategoryListTileGarage(
             text: 'Logout',
             function: () {
-              // FirebaseAuth.instance.signOut();
-              // for(;Navigator.canPop(context);){
-              //   Navigator.pop(context);
-              // }
-              // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignInScreen(
-              // )));
+              FirebaseAuth.instance.signOut();
+              for(;Navigator.canPop(context);){
+                Navigator.pop(context);
+              }
             },
             iconData: Icons.logout,
           ),

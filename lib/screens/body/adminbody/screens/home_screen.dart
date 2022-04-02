@@ -38,8 +38,6 @@ class HomeAdminScreen extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => AddCycle()));
                   },
-                  // imagUrl:
-                  //     'https://fliptoy.s3.ap-south-1.amazonaws.com/ssl-img/2021/01/14112443/foldble-26-t-cycle.jpg',
                 ),
                 MainWidget(
                   text: 'All Cycles',

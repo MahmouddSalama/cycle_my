@@ -36,6 +36,18 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_maps_flutter: ^2.1.1
   flutter_launcher_icons: ^0.9.2
+  firebase_auth: ^3.3.7
+  firebase_core: ^1.8.0
+  cloud_firestore: ^2.5.3
+  firebase_storage: ^10.0.4
+  flutter_barcode_scanner: ^2.0.0
+  barcode_widget: ^2.0.2
+  uuid: ^3.0.6
+  url_launcher:
+  geolocator: ^8.2.0
+  flutter_pdfview: ^1.2.2
+  path_provider: ^2.0.9
+  flutter_cached_pdfview:
 
 
 dev_dependencies:
@@ -65,6 +77,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/image/
+    - assets/pdf/policy.pdf
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

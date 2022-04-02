@@ -5,6 +5,10 @@ import 'package:cycle_my/screens/body/userbody/screens/pay/pay_screen.dart';
 import 'package:flutter/material.dart';
 
 class ChoseMethodOFPay extends StatefulWidget {
+final String cycleID;
+
+   ChoseMethodOFPay({Key? key,required this.cycleID}) : super(key: key);
+
   @override
   State<ChoseMethodOFPay> createState() => _ChoseMethodOFPayState();
 }
@@ -67,8 +71,7 @@ class _ChoseMethodOFPayState extends State<ChoseMethodOFPay> {
                       );
                     }else{
                       // go to pay screen
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>PayScreen()));
-
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>PayScreen(cycleCode: widget.cycleID,pay:payGroup,)));
                     }
                   }),
             ],

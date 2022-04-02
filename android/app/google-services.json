@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "519741069742",
+    "project_id": "cycleme-d26c9",
+    "storage_bucket": "cycleme-d26c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519741069742:android:bfc8e50fc8846117ae503f",
+        "android_client_info": {
+          "package_name": "com.example.cycle_my"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "519741069742-3kh4pjs19n149j357srf97scungk6bq9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWsIuManDwVfPUAunQuot07UM8N2de8yc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "519741069742-3kh4pjs19n149j357srf97scungk6bq9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

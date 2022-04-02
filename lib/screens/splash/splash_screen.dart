@@ -1,11 +1,12 @@
 import 'package:cycle_my/consts/colors.dart';
+import 'package:cycle_my/screens/auth/auth_logic/auth_state.dart';
 import 'package:cycle_my/screens/auth/screens/entry_screen.dart';
 import 'package:flutter/material.dart';
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3),(){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>EntryToApp()
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AuthState()
       ));
     });
     return Scaffold(
@@ -17,7 +18,7 @@ class SplashScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 100,),
               Text(
-                "Cycle Me",
+                "CycleMe",
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                   color: KmainColor.withOpacity(0.5),

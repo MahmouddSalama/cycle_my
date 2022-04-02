@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cycle_my/consts/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 class UserAccount extends StatelessWidget {
   Color color = KmainColor;
@@ -8,44 +10,64 @@ class UserAccount extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            buildContainerHead(size),
-            SizedBox(height: size.height * .01),
-            buildTextfiled('user name', Icons.person_outline, 0),
-            buildTextfiled('Birthday', Icons.event, 0),
-            buildTextfiled('123456789', Icons.phone_android, 0),
-            buildTextfiled('email@gmial.com', Icons.email_outlined, 0),
-            buildTextfiled('******', Icons.lock, 1),
-           const SizedBox(height: 20),
-            Container(
-              width: 200,
-              height: 55,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  gradient: LinearGradient(colors: [
-                    color,
-                    color.withOpacity(.6),
-                  ])),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child:const Text(
-                  'OK',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ],
+        child: StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection('users').snapshots(),
+            builder: (context,AsyncSnapshot<QuerySnapshot> snapshot) {
+              try{
+                final  docs = snapshot.data!.docs.firstWhere((element) =>element.id==FirebaseAuth.instance.currentUser!.uid);
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator(color: KmainColor,));
+                }
+                else if (snapshot.hasError) {
+                  return const Center(child: Text("error"));
+                }
+                else if (snapshot.hasData && snapshot.data!.docs.length != 0) {
+                  return  Column(
+                    children: [
+                      buildContainerHead(size),
+                      SizedBox(height: size.height * .01),
+                      buildTextfiled(docs['userName'], Icons.person_outline, 0),
+                      buildTextfiled(docs['fullName'], Icons.person_sharp, 0),
+                      buildTextfiled(docs['email'], Icons.email_outlined, 0),
+                      buildTextfiled(docs['phone'], Icons.call, 0),
+                      buildTextfiled(docs['id'], Icons.battery_unknown_sharp, 0),
+                      buildTextfiled(docs['password'], Icons.lock, 1),
+                      const SizedBox(height: 20),
+                      Container(
+                        width: 200,
+                        height: 55,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            gradient: LinearGradient(colors: [
+                              color,
+                              color.withOpacity(.6),
+                            ])),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child:const Text(
+                            'OK',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }
+              }catch(e){}
+              return const Center(child: CircularProgressIndicator(color: KmainColor,));
+            }
         ),
       ),
     );
   }
+
+
 
   Padding buildTextfiled(text, icon, num) {
     Color c = Colors.green;

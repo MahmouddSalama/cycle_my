@@ -35,12 +35,11 @@ class DefaultTextField extends StatelessWidget {
         children: [
           Text(label,style:const TextStyle(
             fontSize: 20,
-            color: Colors.black54,
-            fontWeight: FontWeight.w500,
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
           ),),
           const SizedBox(height: 5,),
           TextFormField(
-
             enabled: enabled,
             focusNode: focusNode,
             textInputAction: textInputAction,
@@ -54,7 +53,7 @@ class DefaultTextField extends StatelessWidget {
             },
 
             cursorColor: KmainColor,
-            style:const TextStyle(fontSize: 25, color: Colors.black),
+            style:const TextStyle(fontSize: 20, color: Colors.black),
             keyboardType: textInputType,
             validator: (v) => validetor(v),
             obscureText: isPass!,
@@ -69,7 +68,9 @@ class DefaultTextField extends StatelessWidget {
                 disabledBorder: buildUnderlineInputBorder(KmainColor),
                 enabledBorder: buildUnderlineInputBorder(KmainColor),
                 focusedBorder: buildUnderlineInputBorder(KmainColor),
-                errorBorder: buildUnderlineInputBorder(Colors.red)),
+                errorBorder: buildUnderlineInputBorder(Colors.red),
+            ),
+
           ),
         ],
       ),
