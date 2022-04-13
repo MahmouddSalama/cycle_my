@@ -9,8 +9,8 @@
 * admin
 * tradinal user 
 
-# Methods in syster 
-for Admin
+# Methods in system
+### for Admin
  * login
  * add cyle 
  * edit cyle 
@@ -19,7 +19,7 @@ for Admin
  * view users 
  * view cylcle 
  * delete cycle
-for user
+### for user
  * login 
  * register 
  * make oreder
