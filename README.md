@@ -1,16 +1,27 @@
 # cycle_my
+* domo system for cycles like ouber 
+# USEge
+* flutter as a freamwork version 2.5.9
+* firebase as a server 
+* google map 
 
-A new Flutter application.
+# users
+* admin
+* tradinal user 
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Methods in system
+### for Admin
+ * login
+ * add cyle 
+ * edit cyle 
+ * viwe order 
+ * cancel & accept order 
+ * view users 
+ * view cylcle 
+ * delete cycle
+### for user
+ * login 
+ * register 
+ * make oreder
+ * cancel orede
+ * viwe  his orders 
