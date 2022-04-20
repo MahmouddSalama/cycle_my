@@ -79,7 +79,7 @@ List<Marker> mark=[];
                   position: LatLng(position.latitude, position.longitude),
               onTap: (){
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Selectcycle()));
+                    MaterialPageRoute(builder: (context) => Selectcycle(lang: position.longitude,lat: position.latitude,)));
               }
               ));
               setState(() {});

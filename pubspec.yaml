@@ -48,6 +48,8 @@ dependencies:
   flutter_pdfview: ^1.2.2
   path_provider: ^2.0.9
   flutter_cached_pdfview:
+  flutter_rating_bar: ^4.0.0
+
 
 
 dev_dependencies:

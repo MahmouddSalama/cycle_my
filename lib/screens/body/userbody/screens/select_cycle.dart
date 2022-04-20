@@ -11,6 +11,8 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Selectcycle extends StatefulWidget {
+  final double lang;
+  final double lat;
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 15,
@@ -21,8 +23,10 @@ class Selectcycle extends StatefulWidget {
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
 
+  const Selectcycle({Key? key,required this.lang,required this.lat}) : super(key: key);
+
   @override
-  State<Selectcycle> createState() => _SelectcycleState();
+State<Selectcycle> createState() => _SelectcycleState();
 }
 
 class _SelectcycleState extends State<Selectcycle> {
@@ -68,8 +72,9 @@ class _SelectcycleState extends State<Selectcycle> {
                         position: LatLng(docs[i]['lati'],docs[i]['lang']),
                         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
                         infoWindow: InfoWindow(
-                          title: 'cycle me',
+                          title: 'cycleMe',
                             onTap: () {
+                            if(distance(widget.lat,widget.lang,docs[i]['lati'] , docs[i]['lang'])>.5) {
                               showBottomSheet(context: context, builder: (context){
                                 return Container(
                                   height:size.height*.6,
@@ -105,40 +110,6 @@ class _SelectcycleState extends State<Selectcycle> {
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Row(
-                                              children:  [
-                                                IconButton(onPressed: (){}, icon: Icon(Icons.electric_bike)),
-                                                  Text(
-                                                  "pattary ${Random().nextInt(100)} % ",
-                                                  style: TextStyle(
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: 18,
-                                                    height: 1.2,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children:  [
-                                                IconButton(onPressed: (){}, icon: Icon(Icons.monetization_on_outlined)),
-                                                const Text(
-                                                  "0.5 R.S / minute",
-                                                  style: TextStyle(
-                                                    fontStyle: FontStyle.normal,
-                                                    fontSize: 18,
-                                                    height: 1.2,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
                                           children:  [
                                             IconButton(onPressed: (){}, icon: Icon(Icons.location_on)),
                                             const Text(
@@ -169,6 +140,15 @@ class _SelectcycleState extends State<Selectcycle> {
                                   ),
                                 );
                               });
+                            }
+                            else{
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("This cycle is more than 500 meters away"),
+                                  backgroundColor:KmainColor,
+                                )
+                              );
+                            }
                             }),
                       ));
 
@@ -200,4 +180,27 @@ class _SelectcycleState extends State<Selectcycle> {
     setState(() {});
   });
   }
+  double distance( double lat1,  double long1,
+   double lat2,  double long2)
+  {
+  lat1 = toRadians(lat1);
+  long1 = toRadians(long1);
+  lat2 = toRadians(lat2);
+  long2 = toRadians(long2);
+   var dlong = long2 - long1;
+   var dlat = lat2 - lat1;
+   var ans = pow(sin(dlat / 2), 2) +
+  cos(lat1) * cos(lat2) *
+  pow(sin(dlong / 2), 2);
+  ans = 2 * asin(sqrt(ans));
+   double R = 6371;
+  ans = ans * R;
+
+  return ans;
+  }
+}
+double toRadians(ree)
+{
+  double one_deg = (pi) / 180;
+  return (one_deg * ree);
 }

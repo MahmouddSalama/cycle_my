@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cycle_my/screens/body/userbody/components/order_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -29,6 +30,8 @@ class OrderDetails extends StatefulWidget {
 
 class _OrderDetailsState extends State<OrderDetails> {
   Position? position;
+  var rate;
+  String id='';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,15 +85,15 @@ class _OrderDetailsState extends State<OrderDetails> {
                               text1: 'Time start : ',
                               text2:
                               "${widget.startDate.hour} : ${widget.startDate
-                                  .minute} : ${widget.startDate.second}"),
+                                  .minute}"),
                           buildColumn(
                               text1: 'Time end : ',
                               text2:
                               "${widget.endDate.hour} : ${widget.endDate
-                                  .minute} : ${widget.endDate.second}"),
+                                  .minute} "),
                           buildColumn(text1: 'Timer : ', text2: widget.timer),
                           buildColumn(text1: 'Price : ', text2: widget.price
-                              .toString() + ' rs'),
+                              .toString() + ' SR'),
                         ],
                       ),
                     )
@@ -98,6 +101,56 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ),
               ),
             ),
+            const Text("Choose wallet",style: TextStyle(
+            fontSize: 20,
+              fontWeight: FontWeight.w700
+            ),),
+            Expanded(
+              child:   StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection('wallet').snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          try {
+            final List docs = snapshot.data!.docs
+                .where((element) =>
+            element['id'] ==
+                FirebaseAuth.instance.currentUser!.uid)
+                .toList();
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return const Center(child: Text("error"));
+            } else if (snapshot.hasData &&
+                snapshot.data!.docs.length != 0) {
+              return ListView.builder(
+                physics: BouncingScrollPhysics(),
+                itemBuilder: (ctx, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          onTap:(){
+                            id=docs[index].id.toString();
+                          },
+                          title: Text(docs[index]['cridetNum'].toString()),
+                          subtitle: Text(docs[index]['name']),
+                          leading:  Icon(Icons.payment),
+                          trailing: Text((index+1).toString()),
+                        ),
+                        Divider(color: KmainColor,thickness: 1.5),
+
+                      ],
+                    ),
+                  );
+                },
+                itemCount: docs.length,
+              );
+            }
+          } catch (e) {}
+          return const Center(child: CircularProgressIndicator());
+        }),
+              ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50,
                   vertical: 20),
@@ -106,15 +159,14 @@ class _OrderDetailsState extends State<OrderDetails> {
                 child: CircularProgressIndicator(color: KmainColor,),)
                   : OrderButton(
                 function: ()async {
-                 //position=await currentlocation();
                   order();
                 },
-                text: 'confirm',
+                text: 'Pay',
               ),
             ),
-          ],
+              ]
+            )
         ),
-      ),
     );
   }
 
@@ -149,7 +201,8 @@ class _OrderDetailsState extends State<OrderDetails> {
   order() async {
     widget.load = true;
     setState(() {});
-    try {
+    if(!id.isEmpty) {
+      try {
       await FirebaseFirestore.instance
           .collection('orders')
           .doc()
@@ -161,6 +214,7 @@ class _OrderDetailsState extends State<OrderDetails> {
         'price': widget.price,
         'createdAt': Timestamp.now(),
         'cycleId': widget.cycleID,
+        'walletid':id,
         'accept': true,
       }).then((value) async {
         // await FirebaseFirestore.instance
@@ -174,48 +228,96 @@ class _OrderDetailsState extends State<OrderDetails> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              contentPadding: EdgeInsets.zero,
-              content: Stack(
-                overflow: Overflow.visible,
-                alignment: Alignment.center,
-                children: <Widget>[
-                  Container(
-                    height: 150,
-                    child: Column(
-                      children: const [
-                        SizedBox(height: 60,),
-                        Text("Thank you for using cycle me", style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            color: KmainColor
-                        ),),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    top: -100,
-                    child: Image.asset("assets/image/logo.png",
-                        width: 150, height: 150),
-                  ),
-                  Positioned(
-                    bottom: 1,
-                    child: MaterialButton(
-                      onPressed: () {
-                        for (; Navigator.canPop(context);) {
-                          Navigator.pop(context);
-                        }
+              content: Container(
+                height: 120,
+                child: Column(
+                  children: [
+                    const Text("Rate Us",style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20
+                    ),),
+                    RatingBar.builder(
+                      initialRating: 3,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                        rate=rating;
+                        setState(() {});
                       },
-                      color: KmainColor,
-                      child: const Text("OK", style: TextStyle(
-                          color: Colors.white
-                      ),),
                     ),
-                  )
-                ],
-              ),
+                    TextButton( child: Text('Rate us'), onPressed: ()async{
+                      await FirebaseFirestore.instance
+                          .collection('rates')
+                          .doc()
+                          .set({
+                        'userID': FirebaseAuth.instance.currentUser!.uid,
+                        'rate':rate,
+                        'createdAt': Timestamp.now(),
+                      }).then((value){
+                        Navigator.pop(context);
+                      });
+                    })
+                  ],
+                ),
+              )
             );
           },
-        );
+        ).then((value) {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                contentPadding: EdgeInsets.zero,
+                content: Stack(
+                  overflow: Overflow.visible,
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    Container(
+                      height: 150,
+                      child: Column(
+                        children: const [
+                          SizedBox(height: 60,),
+                          Text("Thank you for using cycle me", style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: KmainColor
+                          ),),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      top: -100,
+                      child: Image.asset("assets/image/logo.png",
+                          width: 150, height: 150),
+                    ),
+                    Positioned(
+                      bottom: 1,
+                      child: MaterialButton(
+                        onPressed: () {
+                          for (; Navigator.canPop(context);) {
+                            Navigator.pop(context);
+                          }
+                        },
+                        color: KmainColor,
+                        child: const Text("OK", style: TextStyle(
+                            color: Colors.white
+                        ),),
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
+          );
+        });
         widget.load = false;
         setState(() {});
       });
@@ -223,6 +325,7 @@ class _OrderDetailsState extends State<OrderDetails> {
       print(e.toString());
       widget.load = false;
       setState(() {});
+    }
     }
   }
 
@@ -248,4 +351,5 @@ class _OrderDetailsState extends State<OrderDetails> {
     Position position = await Geolocator.getCurrentPosition();
     return position;
   }
+
 }

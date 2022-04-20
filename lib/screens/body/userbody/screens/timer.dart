@@ -14,12 +14,11 @@ class OrderTimer extends StatefulWidget {
 class _OrderTimerState extends State<OrderTimer> {
   int second=0,min=0,hour=0;
   bool run=false;
-  DateTime dateTime=DateTime.now();
+ final DateTime dateTime=DateTime.now();
   @override
   Widget build(BuildContext context) {
     if(run){
       timer(run);
-      dateTime=DateTime.now();
       setState(() {
 
       });
@@ -53,9 +52,10 @@ class _OrderTimerState extends State<OrderTimer> {
                 });
                 if(run==false&&(min!=0||hour!=0)){
                   print('time out');
+                  final endtime= DateTime.now();
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx)=>OrderDetails(
                     cycleID: widget.cycleID,
-                     endDate: DateTime.now(),
+                    endDate: endtime,
                      price:min*.5+hour*.5,
                     startDate:dateTime,
                     timer: '$hour : $min : $second ',

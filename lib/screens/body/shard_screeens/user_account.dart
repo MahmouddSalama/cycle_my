@@ -30,7 +30,6 @@ class UserAccount extends StatelessWidget {
                       buildTextfiled(docs['fullName'], Icons.person_sharp, 0),
                       buildTextfiled(docs['email'], Icons.email_outlined, 0),
                       buildTextfiled(docs['phone'], Icons.call, 0),
-                      buildTextfiled(docs['id'], Icons.battery_unknown_sharp, 0),
                       buildTextfiled(docs['password'], Icons.lock, 1),
                       const SizedBox(height: 20),
                       Container(

@@ -52,12 +52,7 @@ class AuthLogic {
       required String userName,
       required String phone,
       required String fullName,
-        required String cridetName,
-        required String mm,
-        required String yy,
-        required String cvv,
-        required String cridetNum,
-        required int payMethod,
+
       }) async {
     String error = '';
     try {
@@ -78,12 +73,6 @@ class AuthLogic {
         'createdAt': Timestamp.now(),
         'admin': false,
         'password': pass,
-        'nameCridet':cridetName,
-        'mm': mm,
-        'yy': yy,
-        'cvv': cvv,
-        'cridetNum': cridetNum,
-        'payMethod': payMethod == 1 ? 'credit' : 'paypal',
       }).then((value) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => AuthState()));
